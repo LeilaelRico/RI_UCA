@@ -9,25 +9,53 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
+import java.util.Scanner;
 
 public class re_main {
 
+    String text;
+
     public static void main(String[] arg) {
 
-        String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
+        Scanner sc = new Scanner(System.in);
+        int opcion;
 
-        try (FileInputStream fis = new FileInputStream(file);
-                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-                BufferedReader reader = new BufferedReader(isr)) {
+        System.out.println("Prueba de menu");
+        System.out.println("1. Ejercicio 1");
+        System.out.println("2. Ejercicio 2");
 
-            String str;
-            while ((str = reader.readLine()) != null) {
-                System.out.println(str);
-            }
+        System.out.print("Selecciona una de las opciones (1-20): ");
+        opcion = sc.nextInt();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        switch (opcion) {
+            case 1:
+                System.out.println("Opción 1");
+                break;
+            case 2:
+                System.out.println("Opción 2");
+                break;
+
+            case 3:
+                String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
+
+                try (FileInputStream fis = new FileInputStream(file);
+                        InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+                        BufferedReader reader = new BufferedReader(isr)) {
+
+                    String str;
+                    while ((str = reader.readLine()) != null) {
+                        System.out.println(str);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                System.out.println("Opción no válida");
         }
+
     }
 
 }
