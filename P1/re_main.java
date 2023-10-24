@@ -246,6 +246,27 @@ public class re_main {
 
                     break;
 
+                /*
+                 * ¿Qué expresión regular utilizarías para comprobar el número de pedido de una
+                 * empresa?
+                 */
+                case 12:
+
+                    String cadena12 = "a#54-1111";
+
+                    // Pattern pat12 =
+                    // Pattern.compile("^[a-z|A-Z][\\s|\\-|\\#|\\#\\s][\\d]{2}[\\s|\\-]?[\\d]{4,5}?");
+                    Pattern pat12 = Pattern.compile("^[a-z|A-Z][\\s|\\-|\\#][\\s]?[\\d]{2}[\\s|\\-]?[\\d]{4,5}?");
+                    Matcher mat12 = pat12.matcher(cadena12);
+
+                    if (mat12.matches()) {
+                        System.out.println("El ID es válido.");
+                    } else {
+                        System.out.println("El ID NO es válido.");
+                    }
+
+                    break;
+
                 case 16:
                     String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
 
