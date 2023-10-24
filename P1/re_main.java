@@ -134,6 +134,118 @@ public class re_main {
 
                     break;
 
+                /* Comprobar si una cadena contiene un 2 y ese no está seguido por un 6 */
+                case 6:
+
+                    String cadena6 = "46427565";
+
+                    Pattern pat6 = Pattern.compile(".*2(?=6).*");
+                    Matcher mat6 = pat6.matcher(cadena6);
+
+                    if (mat6.matches()) {
+                        System.out.println("Al 2 LE SIGUE un 6.");
+                    } else {
+                        System.out.println("El 2 NO es seguido de un 6.");
+                    }
+
+                    break;
+
+                /*
+                 * Comprobar si una cadena está formada por un mínimo de 5 letras mayúsculas o
+                 * minúsculas y un máximo de 10
+                 */
+                case 7:
+
+                    String cadena7 = "asdfghjkluy";
+
+                    Pattern pat7 = Pattern.compile("[a-z]{5,10}?|[A-Z]{5,10}?");
+                    Matcher mat7 = pat7.matcher(cadena7);
+
+                    if (mat7.matches()) {
+                        System.out.println("Cumple con una de las condiciones.");
+                    } else {
+                        System.out.println("No cumple con las condiciones.");
+                    }
+
+                    break;
+
+                /*
+                 * Comprobar si una cadena es una dirección web que comience por www y sea de un
+                 * servidor español
+                 */
+                case 8:
+
+                    String cadena8 = "www.wikimedia124.es";
+
+                    Pattern pat8 = Pattern.compile("^(www.).*(.es)$");
+                    Matcher mat8 = pat8.matcher(cadena8);
+
+                    if (mat8.matches()) {
+                        System.out.println("Se trata de una página con servidor español.");
+                    } else {
+                        System.out.println("No cumple con las condiciones de la página.");
+                    }
+
+                    break;
+
+                /*
+                 * Comprobar si una cadena es una fecha dd/mm/yy. Comprueba que tu patrón
+                 * coincida con las siguientes fechas: 25/10/83, 4/11/56, 30/6/71 y 4/3/85
+                 */
+                case 9:
+
+                    String cadena9 = "4/3/85";
+
+                    Pattern pat9 = Pattern.compile("^(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/\\d{2}$");
+                    Matcher mat9 = pat9.matcher(cadena9);
+
+                    if (mat9.matches()) {
+                        System.out.println("La fecha es válida.");
+                    } else {
+                        System.out.println("La fecha es inválida.");
+                    }
+
+                    break;
+
+                /*
+                 * Comprobar si una cadena contiene una dirección IP. Comprueba que tu patrón
+                 * coincida con las siguientes IP: 192.168.1.1, 200.36.127.40 y 10.128.1.253
+                 */
+                case 10:
+
+                    String cadena10 = "10.128.1.253";
+
+                    Pattern pat10 = Pattern.compile(
+                            "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+                    Matcher mat10 = pat10.matcher(cadena10);
+
+                    if (mat10.matches()) {
+                        System.out.println("La dirección IP es válida.");
+                    } else {
+                        System.out.println("La dirección IP NO es válida.");
+                    }
+
+                    break;
+
+                /*
+                 * ¿Qué expresión regular utilizarías para comprobar si un número de teléfono
+                 * fijo es español?
+                 */
+                case 11:
+
+                    String cadena11 = "+34 65 6030466";
+
+                    Pattern pat11 = Pattern.compile("^(\\+34)\\s[9|8|6|7][0-9]\\s[0-9]{7}");
+                    Matcher mat11 = pat11.matcher(cadena11);
+
+                    if (mat11.matches()) {
+                        System.out.println("SI es un número español.");
+                    } else {
+                        System.out.println("NO es un número español.");
+                    }
+
+                    break;
+
                 case 16:
                     String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
 
