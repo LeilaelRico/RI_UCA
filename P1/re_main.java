@@ -16,6 +16,7 @@ public class re_main {
         /*
          * Lectura del archivo html
          * IMPORTANTE: Cambiar el path al documento correspondiente.
+         * Por ejemplo: C:\\user\\Documents\\P1\\PortalUCA.html
          */
         String file = "";
         StringBuilder contentBuilder = new StringBuilder();
@@ -38,6 +39,7 @@ public class re_main {
         /*
          * Lectura del txt
          * IMPORTANTE: Cambiar el path al documento correspondiente.
+         * Por ejemplo: C:\\user\\Documents\\P1\\EjercicioExpresiones.txt
          */
         String filetxt = "";
         StringBuilder contentBuildertxt = new StringBuilder();
@@ -163,7 +165,7 @@ public class re_main {
                     Matcher mat5 = pat5.matcher(cadena5);
 
                     if (mat5.matches()) {
-                        System.out.println("La cadena está formada únicamente por l o a.");
+                        System.out.println("La cadena está formada únicamente por l y/o a.");
                     } else {
                         System.out.println("La cadena no repite los mismos caracteres.");
                     }
