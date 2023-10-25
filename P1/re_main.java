@@ -4,11 +4,7 @@ import java.io.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.stream.Stream;
+
 import java.util.Scanner;
 
 public class re_main {
@@ -17,8 +13,11 @@ public class re_main {
 
     public static void main(String[] arg) {
 
-        /* Lectura del archivo html */
-        String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\PortalUCA.html";
+        /*
+         * Lectura del archivo html
+         * IMPORTANTE: Cambiar el path al documento correspondiente.
+         */
+        String file = "";
         StringBuilder contentBuilder = new StringBuilder();
         String content;
 
@@ -28,7 +27,6 @@ public class re_main {
 
             String str;
             while ((str = reader.readLine()) != null) {
-                // System.out.println(str);
                 contentBuilder.append(str).append('\n');
             }
 
@@ -36,11 +34,12 @@ public class re_main {
             e.printStackTrace();
         }
         content = contentBuilder.toString();
-        // System.out.println(content);
 
-        /* Lectura del txt */
-
-        String filetxt = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
+        /*
+         * Lectura del txt
+         * IMPORTANTE: Cambiar el path al documento correspondiente.
+         */
+        String filetxt = "";
         StringBuilder contentBuildertxt = new StringBuilder();
         String contenttxt;
 
@@ -50,7 +49,6 @@ public class re_main {
 
             String str;
             while ((str = reader.readLine()) != null) {
-                // System.out.println(str);
                 contentBuildertxt.append(str).append('\n');
             }
 
@@ -58,7 +56,6 @@ public class re_main {
             e.printStackTrace();
         }
         contenttxt = contentBuildertxt.toString();
-        // System.out.println(content);
 
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
@@ -80,19 +77,15 @@ public class re_main {
         System.out.println("13. Ejercicio 13.");
         System.out.println("14. Ejercicio 14.");
         System.out.println("15. Ejercicio 15.");
-        System.out.println("16. Ejercicio 16.");
-        System.out.println("17. Ejercicio 17.");
-        System.out.println("18. Ejercicio 18.");
-        System.out.println("19. Ejercicio 19.");
-        System.out.println("20. Ejercicio 20.");
-        System.out.println("21. Salir.");
+        System.out.println("16. Ejercicios 16 - 20.");
+        System.out.println("17. Salir.");
         System.out.println("-----*****-----*****-----*****-----*****");
         System.out.println("");
 
         do {
             System.out.println("-----*****-----*****-----*****-----*****");
             System.out.println("");
-            System.out.print("Selecciona una de las opciones (1-21): ");
+            System.out.print("Selecciona una de las opciones (1-17): ");
             opcion = sc.nextInt();
 
             switch (opcion) {
@@ -326,7 +319,9 @@ public class re_main {
                         System.out.println("NO ES SPAM.");
                     }
 
-                    /* Imágenes de la página web de la UCA */
+                    break;
+
+                /* Imágenes de la página web de la UCA */
 
                 case 14:
 
@@ -373,11 +368,81 @@ public class re_main {
 
                     break;
 
+                /*
+                 * Elimina los símbolos (:,.;?¿¡!…'"<<>>) del texto que aparece en el fichero
+                 * EjercicioExpresiones.txt
+                 */
+                case 16:
+
+                    String pat16 = "[\\<\\>:,;.¿\\?¡\\!\"]";
+                    String changedText16 = contenttxt.replaceAll(pat16, "");
+                    System.out.println(
+                            "________________________________________________________________________________________");
+                    System.out.println("Cambio inicial");
+                    System.out.println();
+
+                    System.out.println(changedText16);
+                    System.out.println(
+                            "________________________________________________________________________________________");
+
+                    /* Quitar tildes al resultado anterior */
+
+                    String aTildless = changedText16.replaceAll("á", "a");
+                    String eTildless = aTildless.replaceAll("é", "e");
+                    String iTildless = eTildless.replaceAll("í", "i");
+                    String oTildless = iTildless.replaceAll("ó", "o");
+                    String textTildless = oTildless.replaceAll("ú", "u");
+
+                    System.out.println(
+                            "________________________________________________________________________________________");
+                    System.out.println("Sin tildes:");
+                    System.out.println();
+
+                    System.out.println(textTildless);
+                    System.out.println(
+                            "________________________________________________________________________________________");
+
+                    /* Reemplazar del resultado las palabras formadas únicamente por números */
+                    String noNumbers = textTildless.replaceAll("\\s\\d+\\s", "  ");
+
+                    System.out.println(
+                            "________________________________________________________________________________________");
+                    System.out.println("Sin números:");
+                    System.out.println();
+
+                    System.out.println(noNumbers);
+                    System.out.println(
+                            "________________________________________________________________________________________");
+
+                    /* Todo a mayúsculas */
+                    String allMayus = noNumbers.toUpperCase();
+                    System.out.println(
+                            "________________________________________________________________________________________");
+                    System.out.println("Todo a Mayúsculas:");
+                    System.out.println();
+
+                    System.out.println(allMayus);
+                    System.out.println(
+                            "________________________________________________________________________________________");
+
+                    /* Eliminar dobles espacios */
+                    String noDuoSpaces = allMayus.replaceAll("(\\s\\s)", " ");
+                    System.out.println(
+                            "________________________________________________________________________________________");
+                    System.out.println("Sin dobles espacios:");
+                    System.out.println();
+
+                    System.out.println(noDuoSpaces);
+                    System.out.println(
+                            "________________________________________________________________________________________");
+
+                    break;
+
                 default:
                     System.out.println();
             }
 
-        } while (opcion < 21);
+        } while (opcion < 17);
 
     }
 
