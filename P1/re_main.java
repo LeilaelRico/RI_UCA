@@ -17,6 +17,49 @@ public class re_main {
 
     public static void main(String[] arg) {
 
+        /* Lectura del archivo html */
+        String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\PortalUCA.html";
+        StringBuilder contentBuilder = new StringBuilder();
+        String content;
+
+        try (FileInputStream fis = new FileInputStream(file);
+                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(isr)) {
+
+            String str;
+            while ((str = reader.readLine()) != null) {
+                // System.out.println(str);
+                contentBuilder.append(str).append('\n');
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        content = contentBuilder.toString();
+        // System.out.println(content);
+
+        /* Lectura del txt */
+
+        String filetxt = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
+        StringBuilder contentBuildertxt = new StringBuilder();
+        String contenttxt;
+
+        try (FileInputStream fis = new FileInputStream(filetxt);
+                InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(isr)) {
+
+            String str;
+            while ((str = reader.readLine()) != null) {
+                // System.out.println(str);
+                contentBuildertxt.append(str).append('\n');
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contenttxt = contentBuildertxt.toString();
+        // System.out.println(content);
+
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
 
@@ -267,25 +310,71 @@ public class re_main {
 
                     break;
 
-                case 16:
-                    String file = "D:\\crisb\\Documents\\Programacion\\RI_UCA\\P1\\EjercicioExpresiones.txt";
+                /*
+                 * Para evitar el spam, intenta localizar posibles alteraciones que se utilizan
+                 * para saltarse los filtros de correo.
+                 */
+                case 13:
+                    String cadena13 = "v1@gr@";
 
-                    try (FileInputStream fis = new FileInputStream(file);
-                            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
-                            BufferedReader reader = new BufferedReader(isr)) {
+                    Pattern pat13 = Pattern.compile("v[i!1][a@]gr[a@]");
+                    Matcher mat13 = pat13.matcher(cadena13);
 
-                        String str;
-                        while ((str = reader.readLine()) != null) {
-                            System.out.println(str);
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (mat13.matches()) {
+                        System.out.println("ES SPAM.");
+                    } else {
+                        System.out.println("NO ES SPAM.");
                     }
+
+                    /* Imágenes de la página web de la UCA */
+
+                case 14:
+
+                    Pattern pat14 = Pattern.compile("\\<(img).*\\>");
+                    Matcher mat14 = pat14.matcher(content);
+
+                    int count = 1;
+                    while (mat14.find()) {
+                        count += 1;
+                    }
+
+                    System.out.print("El portal cuenta con ");
+                    System.out.print(count);
+                    System.out.println(" imágenes.");
+
+                    break;
+
+                /*
+                 * Extracción de caracteres de una cadena
+                 * Con el regex "\\<[^\\>]*\\>([^\\<]*)\\</[^\\>]*\\>", a la salida el programa
+                 * da <a>uno</a>, ..., <e>cinco</e>, todos tras un salto de línea.
+                 * 
+                 * Con "\\<.*\\>(.*)\\<\\/.*\\>", la consola arroja
+                 * <a>uno</a><b>dos</b><c>tres</c><d>cuatro</d><e>cinco</e>.
+                 * 
+                 * Con "\\<.*?\\>(.*?)\\<\\/.*?\\>" sale un resultado similar al primero. En
+                 * caso de agrupar en la línea 363 por 1, la consola solamente arroja los
+                 * números sin las tags.
+                 */
+
+                case 15:
+
+                    String cadena15 = "<a>uno</a><b>dos</b><c>tres</c><d>cuatro</d><e>cinco</e>";
+
+                    Pattern pat15 = Pattern.compile("<([a-e])>.*?");
+                    Matcher mat15 = pat15.matcher(cadena15);
+
+                    while (mat15.find()) {
+                        String exit15 = mat15.group(1);
+                        System.out.print(exit15);
+                        System.out.print(" ");
+                    }
+                    System.out.println();
+
                     break;
 
                 default:
-                    System.out.println("");
+                    System.out.println();
             }
 
         } while (opcion < 21);
