@@ -13,7 +13,7 @@ import random
 import re
 
 # Creation of txt where site's title and link will be saved
-archivo = open("sitesVisited.txt", "w", encoding='utf-8')
+resultsFile = open("sitesVisited.txt", "w", encoding='utf-8')
 
 
 # Function that calls the crawler for future recursion.
@@ -22,10 +22,11 @@ def creWikiCrawler(url):
 		url=url,
 	)
 
-	dataPull = BeautifulSoup(response.content, 'html.parser')
+	dataPull = BeautifulSoup(response.content, 'html.parser', on_duplicate_attribute='ignore')
 
 	wikiTitle = dataPull.find(id="firstHeading")
-	archivo.write(wikiTitle.text + "     ------->     " + url + "\n")
+	resultsFile.write(wikiTitle.text + "     ------->     " + url + "\n")
+	print("--------------GUARDAR    " + wikiTitle.text + "     ------->     " + url + "\n")
 
 	# findAllLinks includes a regex expression that searchs the urls with /wiki/ on it.
 	findAllLinks = dataPull.find(id="bodyContent").find_all(
@@ -35,16 +36,13 @@ def creWikiCrawler(url):
 	for link in findAllLinks:
 
 		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link
-		# is not part of it, links will be re-shuffled.
-		if link['href'].find("es.wikipedia.org") == -1:
-			continue
+		# is not, function will be called with another default link.
+		if 'href' in link.attrs:
+			print(" PASO:     https://es.wikipedia.org" + link['href'])
+			creWikiCrawler("https://es.wikipedia.org" + link['href'])
 
 		else:
-			creWikiCrawler("https://es.wikipedia.org/wiki/Crawling")
-
-	print("https://es.wikipedia.org" + link['href'])
-
-	creWikiCrawler("https://es.wikipedia.org" + link['href'])
-
+			print("USED\n")
+			creWikiCrawler("https://es.wikipedia.org/wiki/Gravedad")
 
 creWikiCrawler("https://es.wikipedia.org/wiki/Wikipedia:Portada")
