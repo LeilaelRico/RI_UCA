@@ -18,30 +18,27 @@ archivo = open("sitesVisited.txt", "w", encoding='utf-8')
 
 
 # Function that calls the crawler for future recursion.
-# Timeout instruction tells function to wait 5 seconds before doing a new get.
 def creWikiCrawler(url):
 	response = requests.get(
-		url=url, timeout=3,
+		url=url,
 	)
 
 	dataPull = BeautifulSoup(response.content, 'html.parser')
 
 	wikiTitle = dataPull.find(id="firstHeading")
-	# print(url)
-	archivo.write(wikiTitle.text + ":    " + url + "\n")
+	archivo.write(wikiTitle.text + "     ------->     " + url + "\n")
 
 	findAllLinks = dataPull.find(id="bodyContent").find_all(
 		"a", href=re.compile("^(/wiki/)"))
-	# print(findAllLinks)
 	random.shuffle(findAllLinks)
-	# print(findAllLinks)
-	linkToScrape = 0
 
 	for link in findAllLinks:
 
-		# Condition will check and choose link that is part of a wiki from Wikipedia Spain.
+		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link is not part of it, links will be re-shuffled.
 		if link['href'].find("es.wikipedia.org"):
 			continue
+		else:
+			random.shuffle(findAllLinks)
 
 	print("https://es.wikipedia.org" + link['href'])
 
