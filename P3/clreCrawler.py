@@ -22,7 +22,8 @@ def creWikiCrawler(url):
 		url=url,
 	)
 
-	dataPull = BeautifulSoup(response.content, 'html.parser', on_duplicate_attribute='ignore')
+	dataPull = BeautifulSoup(response.content, 'html.parser',
+	                         on_duplicate_attribute='ignore')
 
 	wikiTitle = dataPull.find(id="firstHeading")
 	resultsFile.write(wikiTitle.text + "     ------->     " + url + "\n")
@@ -42,5 +43,6 @@ def creWikiCrawler(url):
 
 		else:
 			creWikiCrawler("https://es.wikipedia.org/wiki/Gravedad")
+
 
 creWikiCrawler("https://es.wikipedia.org/wiki/Wikipedia:Portada")
