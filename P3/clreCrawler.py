@@ -36,11 +36,11 @@ def creWikiCrawler(url):
 
 		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link
 		# is not part of it, links will be re-shuffled.
-		if link['href'].find("es.wikipedia.org"):
+		if link['href'].find("es.wikipedia.org") == -1:
 			continue
 
 		else:
-			random.shuffle(findAllLinks)
+			creWikiCrawler("https://es.wikipedia.org/wiki/Crawling")
 
 	print("https://es.wikipedia.org" + link['href'])
 
