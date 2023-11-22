@@ -26,7 +26,7 @@ def creWikiCrawler(url):
 
 	wikiTitle = dataPull.find(id="firstHeading")
 	resultsFile.write(wikiTitle.text + "     ------->     " + url + "\n")
-	print("--------------GUARDAR    " + wikiTitle.text + "     ------->     " + url + "\n")
+	print("Sitio: " + wikiTitle.text + "     ------->     URL:" + url + "\n")
 
 	# findAllLinks includes a regex expression that searchs the urls with /wiki/ on it.
 	findAllLinks = dataPull.find(id="bodyContent").find_all(
@@ -38,11 +38,9 @@ def creWikiCrawler(url):
 		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link
 		# is not, function will be called with another default link.
 		if 'href' in link.attrs:
-			print(" PASO:     https://es.wikipedia.org" + link['href'])
 			creWikiCrawler("https://es.wikipedia.org" + link['href'])
 
 		else:
-			print("USED\n")
 			creWikiCrawler("https://es.wikipedia.org/wiki/Gravedad")
 
 creWikiCrawler("https://es.wikipedia.org/wiki/Wikipedia:Portada")
