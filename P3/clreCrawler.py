@@ -10,7 +10,6 @@ Práctica 3: Crawler Avanzado
 import requests
 from bs4 import BeautifulSoup
 import random
-from time import sleep
 import re
 
 # Creation of txt where site's title and link will be saved
@@ -28,15 +27,18 @@ def creWikiCrawler(url):
 	wikiTitle = dataPull.find(id="firstHeading")
 	archivo.write(wikiTitle.text + "     ------->     " + url + "\n")
 
+	# findAllLinks includes a regex expression that searchs the urls with /wiki/ on it.
 	findAllLinks = dataPull.find(id="bodyContent").find_all(
 		"a", href=re.compile("^(/wiki/)"))
 	random.shuffle(findAllLinks)
 
 	for link in findAllLinks:
 
-		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link is not part of it, links will be re-shuffled.
+		# Condition will check and choose link that is part of a wiki from Wikipedia Spain, in case a link
+		# is not part of it, links will be re-shuffled.
 		if link['href'].find("es.wikipedia.org"):
 			continue
+
 		else:
 			random.shuffle(findAllLinks)
 
